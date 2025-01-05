@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gestión de Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Crea una nueva cita</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form #form="ngForm">
+        <ion-item>
+          <ion-label position="stacked">Cita</ion-label>
+          <ion-input
+            [(ngModel)]="nuevaCita.frase"
+            name="frase"
+            required
+            minlength="5"
+            placeholder="Introduce la cita aquí"
+            #fraseInput="ngModel">
+          </ion-input>
+        </ion-item>
+        <ion-note *ngIf="fraseInput.invalid && fraseInput.touched" color="danger">
+          La cita debe tener al menos 5 caracteres.
+        </ion-note>
+
+        <ion-item>
+          <ion-label position="stacked">Autor</ion-label>
+          <ion-input
+            [(ngModel)]="nuevaCita.autor"
+            name="autor"
+            required
+            minlength="2"
+            placeholder="Introduce el autor aquí"
+            #autorInput="ngModel">
+          </ion-input>
+        </ion-item>
+        <ion-note *ngIf="autorInput.invalid && autorInput.touched" color="danger">
+          El autor debe tener al menos 2 caracteres.
+        </ion-note>
+
+        <ion-button expand="full" (click)="agregarCita()" [disabled]="form.invalid">
+          Agregar
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let cita of citas">
+      <ion-label>
+        <h2>{{ cita.frase }}</h2>
+        <p>{{ cita.autor }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="eliminarCita(cita)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

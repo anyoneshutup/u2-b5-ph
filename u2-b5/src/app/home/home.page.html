@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Citas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="irAConfiguracion()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+
+  <ion-card *ngIf="botonActivo && citaAleatoria" class="ion-padding">
+    <ion-card-content class="ion-text-center">
+      <p>{{ citaAleatoria?.frase || 'No hay citas disponibles' }}</p>
+      <p><i>- {{ citaAleatoria?.autor || '' }}</i></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irAGestionCitas()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
